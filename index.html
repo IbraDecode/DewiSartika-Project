@@ -241,17 +241,57 @@
             transform: translateY(0);
         }
         
-        footer {
-            background-color: #2a6699;
-            color: white;
-            text-align: center;
-            padding: 30px 0;
-        }
-        
-        .copyright {
-            font-size: 0.9rem;
-            margin-top: 20px;
-        }
+footer {
+    background-color: #2a6699;
+    color: white;
+    text-align: center;
+    padding: 40px 0;
+    position: relative;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+    border-top: 3px solid #4a8ec0;
+}
+
+footer .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+footer p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    opacity: 1;  /* Mengubah opacity agar selalu terlihat */
+    transform: none;  /* Menghapus transformasi */
+}
+
+.copyright {
+    font-size: 0.9rem;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Tambahkan efek hover pada footer */
+footer:hover {
+    background-color: #1d4d80;
+    transition: background-color 0.3s ease;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 768px) {
+    footer {
+        padding: 30px 0;
+    }
+    
+    footer p {
+        font-size: 1rem;
+    }
+    
+    .copyright {
+        font-size: 0.8rem;
+    }
+}
         
         @keyframes fadeInUp {
             from {
@@ -443,7 +483,7 @@
                 </div>
                 
                 <div class="image-container animate-element delay-200">
-                    <img src="https://files.catbox.moe/kofyrh.jpeg" alt="Momen kehilangan">
+                    <img src="/api/placeholder/800/500" alt="Momen kehilangan">
                     <div class="image-caption">
                         <h3>Momen yang Mengubah Segalanya</h3>
                         <p>Ketika waktu seakan berhenti dan dunia menjadi sunyi.</p>
@@ -457,7 +497,7 @@
         </div>
     </section>
     
-    <div class="parallax" style="background-image: url('https://files.catbox.moe/l9mmy4.jpeg')">
+    <div class="parallax" style="background-image: url('/api/placeholder/1000/600')">
         <div class="parallax-overlay"></div>
         <div class="parallax-content">
             <h2 class="parallax-title">Perjalanan Penyembuhan</h2>
@@ -476,7 +516,7 @@
                 </div>
                 
                 <div class="image-container animate-element delay-300">
-                    <img src="https://files.catbox.moe/b029e4.jpeg" alt="Proses menulis">
+                    <img src="/api/placeholder/800/500" alt="Proses menulis">
                     <div class="image-caption">
                         <h3>Menulis untuk Menyembuhkan</h3>
                         <p>Kata-kata menjadi pelipur lara di saat-saat tersulit.</p>
@@ -557,12 +597,13 @@
         </div>
     </section>
     
-    <footer>
-        <div class="container">
-            <p>Setelah Dia Pergi - Sebuah Perjalanan Menuju Penyembuhan</p>
-            <p class="copyright">© 2025 DewiSartika-9C || SMPN 19 MATARAM</p>
-        </div>
-    </footer>
+<footer>
+    <div class="container">
+        <p><strong>Setelah Dia Pergi</strong> - Sebuah Perjalanan Menuju Penyembuhan</p>
+        <p style="color: rgba(255, 255, 255, 0.9);">Karya Dewi Sartika</p>
+        <p class="copyright">© 2025 DewiSartika-9C || SMPN 19 MATARAM</p>
+    </div>
+</footer>
     
     <script>
         // Create bubbles for header background
