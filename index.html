@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setelah Dia Pergi - Dewi Sartika</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #e6f2ff;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #2a6699;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .moving-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4a8ec0, #2a6699);
+            background-size: 400% 400%;
+            animation: gradientBg 30s infinite ease;
+        }
+        
+        @keyframes gradientBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .floating-bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+        }
+        
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in;
+            opacity: 0;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-1000px);
+                opacity: 0;
+            }
+        }
+        
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+            animation-delay: 0.5s;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+            animation-delay: 1s;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 50px;
+            font-size: 0.9rem;
+            opacity: 0;
+            animation: fadeInUp 1s forwards, bounce 2s infinite;
+            animation-delay: 2s;
+            cursor: pointer;
+            z-index: 2;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2a6699;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s, transform 1s;
+        }
+        
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .content {
+            margin-bottom: 40px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s, transform 1s;
+            transition-delay: 0.3s;
+        }
+        
+        p.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .image-container {
+            position: relative;
+            margin: 60px 0;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(42, 102, 153, 0.3);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+        }
+        
+        .image-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(42, 102, 153, 0.9));
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.5s;
+        }
+        
+        .image-container:hover .image-caption {
+            transform: translateY(0);
+        }
+        
+        .quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            text-align: center;
+            padding: 40px;
+            margin: 40px 0;
+            border-left: 5px solid #2a6699;
+            background: rgba(230, 242, 255, 0.7);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s, transform 1s;
+            box-shadow: 0 5px 15px rgba(42, 102, 153, 0.1);
+        }
+        
+        .quote.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        footer {
+            background-color: #2a6699;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .highlight {
+            color: #4a8ec0;
+            font-weight: 600;
+        }
+        
+        /* Animasi untuk transisi halaman */
+        .section-content {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s, transform 1s;
+        }
+        
+        .section-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Efek parallax untuk gambar */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            margin: 80px 0;
+            overflow: hidden;
+        }
+        
+        .parallax::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4a8ec0, #2a6699);
+            opacity: 0.8;
+            animation: gradientBg 10s infinite alternate;
+        }
+        
+        .parallax-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .parallax-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 700px;
+            padding: 0 20px;
+        }
+        
+        .parallax-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Animasi elemen yang muncul satu per satu */
+        .animate-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s, transform 1s;
+        }
+        
+        .animate-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
+        .delay-400 { transition-delay: 0.4s; }
+        .delay-500 { transition-delay: 0.5s; }
+        
+        .rain-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .rain-drop {
+            position: absolute;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            animation: rain linear infinite;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .quote {
+                font-size: 1.5rem;
+                padding: 30px;
+            }
+            
+            .parallax-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .quote {
+                font-size: 1.3rem;
+                padding: 20px;
+            }
+            
+            .image-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="moving-bg"></div>
+        <div class="floating-bubbles" id="bubbles"></div>
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <h1>Setelah Dia Pergi</h1>
+            <p class="subtitle">Sebuah perjalanan menemukan kekuatan setelah kehilangan</p>
+        </div>
+        <div class="scroll-down">Scroll untuk membaca ▼</div>
+    </header>
+    
+    <section id="pergi">
+        <div class="container">
+            <h2 class="section-title">Hari Dia Pergi</h2>
+            <div class="section-content">
+                <div class="content">
+                    <p class="animate-element delay-100">Hari itu, aku masih ingat dengan jelas. Hari itu, dia pergi meninggalkan aku tanpa pamit. Aku masih ingat bagaimana perasaan aku saat itu, seperti dunia aku runtuh. Aku merasa seperti kehilangan sebagian dari diri aku sendiri.</p>
+                </div>
+                
+                <div class="image-container animate-element delay-200">
+                    <img src="/api/placeholder/800/500" alt="Momen kehilangan">
+                    <div class="image-caption">
+                        <h3>Momen yang Mengubah Segalanya</h3>
+                        <p>Ketika waktu seakan berhenti dan dunia menjadi sunyi.</p>
+                    </div>
+                </div>
+                
+                <div class="quote animate-element delay-300">
+                    "Terkadang, kita harus kehilangan untuk belajar menghargai apa yang kita miliki."
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="parallax" style="background-image: url('/api/placeholder/1000/600')">
+        <div class="parallax-overlay"></div>
+        <div class="parallax-content">
+            <h2 class="parallax-title">Perjalanan Penyembuhan</h2>
+            <p>Setiap hari adalah langkah menuju kebangkitan diri yang baru</p>
+        </div>
+    </div>
+    
+    <section id="penyembuhan">
+        <div class="container">
+            <h2 class="section-title">Proses Penyembuhan</h2>
+            <div class="section-content">
+                <div class="content">
+                    <p class="animate-element delay-100">Setelah dia pergi, aku merasa sangat sedih dan kehilangan arah. Aku tidak tahu bagaimana aku bisa melanjutkan hidup tanpa dia. Tapi, seiring waktu, aku mulai menyadari bahwa aku harus melanjutkan hidup. Aku mulai mencari cara untuk memproses perasaan aku dan menemukan kekuatan untuk melanjutkan hidup.</p>
+                    
+                    <p class="animate-element delay-200">Aku mulai dengan <span class="highlight">menulis</span>. Aku menulis tentang perasaan aku, tentang kenangan aku dengan dia, dan tentang bagaimana aku merasa saat itu. Menulis membantu aku memproses perasaan aku dan melepaskan beban yang aku rasakan.</p>
+                </div>
+                
+                <div class="image-container animate-element delay-300">
+                    <img src="/api/placeholder/800/500" alt="Proses menulis">
+                    <div class="image-caption">
+                        <h3>Menulis untuk Menyembuhkan</h3>
+                        <p>Kata-kata menjadi pelipur lara di saat-saat tersulit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="kekuatan">
+        <div class="container">
+            <h2 class="section-title">Menemukan Kekuatan</h2>
+            <div class="section-content">
+                <div class="content">
+                    <p class="animate-element delay-100">Seiring waktu, aku mulai menemukan kekuatan untuk melanjutkan hidup. Aku mulai menyadari bahwa aku tidak sendirian, bahwa ada banyak orang yang pernah mengalami kehilangan seperti aku. Aku mulai mencari dukungan dari teman-teman dan keluarga, dan aku mulai menemukan kekuatan untuk melanjutkan hidup.</p>
+                    
+                    <p class="animate-element delay-200">Aku juga mulai menemukan kegiatan yang aku sukai, seperti <span class="highlight">membaca dan menulis</span>. Kegiatan-kegiatan itu membantu aku mengalihkan perhatian aku dari kesedihan dan menemukan kebahagiaan dalam hidup.</p>
+                </div>
+                
+                <div class="image-container animate-element delay-300">
+                    <img src="https://files.catbox.moe/jxmbtj.jpg" alt="Menemukan kekuatan">
+                    <div class="image-caption">
+                        <h3>Menemukan Cahaya dalam Kegelapan</h3>
+                        <p>Sesekali, kebahagiaan datang dari hal-hal sederhana yang memberi kita alasan untuk tersenyum.</p>
+                    </div>
+                </div>
+                
+                <div class="quote animate-element delay-400">
+                    "Kekuatan tidak datang dari apa yang kamu mampu lakukan. Kekuatan datang dari mengatasi hal-hal yang kamu pikir tidak bisa kamu lakukan."
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="parallax" style="background-image: url('https://files.catbox.moe/xjuiix.jpg')">
+        <div class="parallax-overlay"></div>
+        <div class="parallax-content">
+            <h2 class="parallax-title">Melangkah Maju</h2>
+            <p>Menemukan jalan baru setelah kehilangan</p>
+        </div>
+    </div>
+    
+    <section id="melanjutkan">
+        <div class="container">
+            <h2 class="section-title">Melanjutkan Hidup</h2>
+            <div class="section-content">
+                <div class="content">
+                    <p class="animate-element delay-100">Setelah dia pergi, aku merasa seperti aku tidak bisa melanjutkan hidup. Tapi, seiring waktu, aku mulai menyadari bahwa aku harus melanjutkan hidup. Aku mulai menemukan cara untuk memproses perasaan aku dan menemukan kekuatan untuk melanjutkan hidup.</p>
+                    
+                    <p class="animate-element delay-200">Aku belajar bahwa kehilangan seseorang yang dicintai adalah bagian dari hidup, dan bahwa kita harus belajar untuk melanjutkan hidup dengan lebih baik. Aku juga belajar bahwa kita harus <span class="highlight">menghargai waktu</span> yang kita miliki dengan orang-orang yang kita cintai, karena kita tidak tahu kapan mereka akan pergi.</p>
+                </div>
+                
+                <div class="image-container animate-element delay-300">
+                    <img src="https://files.catbox.moe/e8mqzb.jpg" alt="Melanjutkan hidup">
+                    <div class="image-caption">
+                        <h3>Membangun Kembali</h3>
+                        <p>Setiap langkah baru adalah kemenangan kecil dalam perjalanan pemulihan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="kesimpulan">
+        <div class="container">
+            <h2 class="section-title">Kesimpulan</h2>
+            <div class="section-content">
+                <div class="content">
+                    <p class="animate-element delay-100">Setelah dia pergi, aku merasa seperti aku tidak bisa melanjutkan hidup. Tapi, seiring waktu, aku mulai menyadari bahwa aku harus melanjutkan hidup. Aku belajar bahwa kehilangan seseorang yang dicintai adalah bagian dari hidup, dan bahwa kita harus belajar untuk melanjutkan hidup dengan lebih baik.</p>
+                    
+                    <p class="animate-element delay-200">Aku harap cerita aku bisa membantu orang lain yang pernah mengalami kehilangan seperti aku. Aku harap kita semua bisa menemukan kekuatan untuk melanjutkan hidup dan menghargai waktu yang kita miliki dengan orang-orang yang kita cintai.</p>
+                </div>
+                
+                <div class="quote animate-element delay-300">
+                    "Hidup bukanlah tentang menunggu badai berlalu, tetapi tentang belajar menari dalam hujan."
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>Setelah Dia Pergi - Sebuah Perjalanan Menuju Penyembuhan</p>
+            <p class="copyright">© 2025 DewiSartika-9C || SMPN 19 MATARAM</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Create bubbles for header background
+        function createBubbles() {
+            const bubbles = document.getElementById('bubbles');
+            const count = 15;
+            
+            for (let i = 0; i < count; i++) {
+                const size = Math.random() * 60 + 20;
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = Math.random() * 100 + '%';
+                bubble.style.animationDuration = (Math.random() * 15 + 15) + 's';
+                bubble.style.animationDelay = (Math.random() * 8) + 's';
+                bubbles.appendChild(bubble);
+            }
+        }
+        
+        // Function to check if element is in viewport
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8 &&
+                rect.bottom >= 0 &&
+                rect.left >= 0 &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+        
+        // Function to add visible class to elements in viewport
+        function handleScroll() {
+            const elements = document.querySelectorAll('.section-title, .section-content, .animate-element, .image-container, .quote');
+            
+            elements.forEach(element => {
+                if (isElementInViewport(element)) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // Add event listeners
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('load', function() {
+            createBubbles();
+            handleScroll();
+        });
+        
+        // Smooth scroll for scroll down button
+        document.querySelector('.scroll-down').addEventListener('click', function() {
+            document.querySelector('#pergi').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+        
+        // Add smooth scrolling to all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
